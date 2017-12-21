@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/TheBrainFamily/tingodb-promise/issues"
   },
-  "homepage": "https://github.com/TheBrainFamily/tingodb-promise#readme"
+  "homepage": "https://github.com/TheBrainFamily/tingodb-promise#readme",
+  "dependencies": {
+    "thenify": "^3.3.0",
+    "tingodb": "^0.5.1"
+  }
 }
