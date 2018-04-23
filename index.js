@@ -40,6 +40,18 @@ module.exports = function (collectionName = 'collectionName') {
     return newCursor
   }
 
-  return newCollection
-}
+  newCollection.distinct = (field, query) => {
+    newCollection
+      .find(query)
+      .toArray()
+      .then(data => {
+        const values = {};
+        data.forEach(document => {
+          values[document[field]] = true;
+        });
+        return Object.keys(values);
+      });
+  };
 
+  return newCollection;
+};
