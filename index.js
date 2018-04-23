@@ -41,7 +41,7 @@ module.exports = function (collectionName = 'collectionName') {
   }
 
   newCollection.distinct = (field, query) => {
-    newCollection
+    return newCollection
       .find(query)
       .toArray()
       .then(data => {
