@@ -21,22 +21,32 @@ module.exports = function (collectionName = 'collectionName') {
       return { result: { ok: res.length, n: res.length }, ops: res, insertedCount: res.length, insertedIds: ids }
     })
   }
+
   newCollection.find = (...args) => {
     const cursor = collection.find(...args)
-    let methods = ['toArray', 'skip']
     const newCursor = {}
+    const methods = ['toArray', 'skip']
     methods.forEach(method => {
       newCursor[method] = thenify(cursor[method].bind(cursor))
     })
     newCursor.each = cursor.each.bind(cursor)
+
+    const limit = (...args) => {
+      const limitCursor = cursor.limit(...args)
+      return {
+        toArray: thenify(limitCursor.toArray.bind(limitCursor))
+      }
+    }
+
     newCursor.sort = (...args) => {
       const sortCursor = cursor.sort(...args)
-
-      const newSort = {
+      return {
+        limit,
         toArray: thenify(sortCursor.toArray.bind(sortCursor))
       }
-      return newSort
     }
+
+    newCursor.limit = limit
     return newCursor
   }
 
