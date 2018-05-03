@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "BABEL_ENV=test ./node_modules/.bin/jest",
-    "testWatch": "BABEL_ENV=test ./node_modules/.bin/jest --watch"
+    "testWatch": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
